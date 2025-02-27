@@ -46,7 +46,7 @@ const Todo = () =>{
         <div className="bg-gray-100 p-6 rounded shadow-md w-full max-w-lg lg:w-1/4 ">
       <h2 className="text-center font-bold text-3xl mb-4">Todoapp with Redux</h2>
      <div className="flex">
-      <input  className = "py-2 px-4 border rounded w-full "type ="text" value = {text} placeholder='Input text' onChange={(e)=>setText(e.target.value)}/>
+      <input  className = "py-2 px-4 border rounded w-full "type ="text" value = {text} placeholder='Enter text' onChange={(e)=>setText(e.target.value)}/>
       { isEdit ? <button
         onClick = {()=>saveBtnHandler()}>Save
       </button> :   <button className='py-2 px-4 bg-blue-500 rounded' onClick={handleAddTodo}><FaPlus/></button>
