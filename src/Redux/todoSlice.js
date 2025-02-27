@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-{/*const task = localStorage.getItem('todos') !== null ? JSON.parse(localStorage.getItem(('todos'))) : []*/}
+const task = localStorage.getItem('todos') !== null ? JSON.parse(localStorage.getItem(('todos'))) : []
 
 
 
@@ -16,7 +16,7 @@ const todoSlice = createSlice({
               state.todos.push(action.payload);
               console.log(action.payload);
               
-              {/*localStorage.setItem('todos',JSON.stringify(state.todos.map(task=>task)))*/}
+              localStorage.setItem('todos',JSON.stringify(state.todos.map(task=>task)))
               
               
         },   
@@ -33,8 +33,12 @@ const todoSlice = createSlice({
                 }
                 return todo;
             })
+        },
+
+    
+        clearTodo:(state,action)=>{
+            state.todos=[];
         }
-        
 
         
         
@@ -46,5 +50,5 @@ const todoSlice = createSlice({
 );
 console.log("Actions" ,todoSlice.initialState);
 
-export const {addTodo,deleteTodo,editTodo}=todoSlice.actions;
+export const {addTodo,deleteTodo,editTodo,clearTodo}=todoSlice.actions;
 export default todoSlice.reducer;

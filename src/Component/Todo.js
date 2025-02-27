@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, deleteTodo,editTodo } from "../Redux/todoSlice";
+import { addTodo, deleteTodo,editTodo,clearTodo } from "../Redux/todoSlice";
+import{FaPlus,FaPencilAlt,FaTrash} from 'react-icons/fa'
 
 
 const Todo = () =>{
@@ -34,47 +35,53 @@ const Todo = () =>{
     setText('');
     setIsEdit(false);
    }
-
+   
+   const handleClearTodo =()=>{
+    dispatch(clearTodo());
+   }
    
   
     return(
-        <div>
-      <h2>Todoapp with Redux</h2>
-      <div className='input-field'>
-      <input type ="text" value = {text} placeholder='Input text' onChange={(e)=>setText(e.target.value)}/>
-  
-
+       <div className="items-center flex flex-col gap-4 p-4">
+        <div className="bg-gray-100 p-6 rounded shadow-md w-full max-w-lg lg:w-1/4 ">
+      <h2 className="text-center font-bold text-3xl mb-4">Todoapp with Redux</h2>
+     <div className="flex">
+      <input  className = "py-2 px-4 border rounded w-full "type ="text" value = {text} placeholder='Input text' onChange={(e)=>setText(e.target.value)}/>
       { isEdit ? <button
         onClick = {()=>saveBtnHandler()}>Save
-      </button> :   <button className='add-btn' onClick={handleAddTodo}>addTodo</button>
+      </button> :   <button className='py-2 px-4 bg-blue-500 rounded' onClick={handleAddTodo}><FaPlus/></button>
         }
+       </div>
+       </div>
+    
+       
+       
 
+      {todos.length > 0 && (
+        <div className="bg-gray-100 p-6 rounded shadow-md w-full max-w-lg lg:w-1/4  "> 
+        <ul>
+          {todos.map((todo)=>(
+          <li className="flex item-center justify-between bg-white p-3 mb-3">
+            <span>{todo.text}</span>
+            <div>
+            <button  className =" bg-green-400 mr-2 p-2  rounded" onClick={()=>handleDeleteTodo(todo.id)}><FaTrash/></button>
+        <button className = "bg-red-400 p-2 rounded" onClick ={()=>editHandler(todo)}><FaPencilAlt/></button>
+        </div>
+          </li>
+
+          ))}
+        </ul>
+         </div>
+    
+       )}
+       <div>
+       <button  className = "bg-red-400 mr-2 p-2 rounded" onClick={handleClearTodo}>Clear</button>
       </div>
 
-       
-      
-      <div className="todolist">
-        
-       {todos.map((todo) => <li className="todos" key={todos.id}  >
-    {todo.text}
-
-        <button  className ="delete-btn" onClick={()=>handleDeleteTodo(todo.id)}>Delete</button>
-        <button onClick ={()=>editHandler(todo)}>Edit</button>
-        
     
-        </li>    
-  
-       )}
-
-    
-
-      
-
-    
-      </div> 
-       
-
     </div>
+      
+
     
     );
 };
