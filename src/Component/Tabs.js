@@ -10,9 +10,11 @@ function Tabs() {
     <div>
         <ul>
             {tabs.map((tab)=>(
-         <li className = {selectedTab == tab ? `active` : ``}
+         <li className = {selectedTab == tab? `active` : ``}
          onClick={()=>dispatch(setFilter(tab))}>
             {tab}
+
+         
             
          </li>
             ))}
